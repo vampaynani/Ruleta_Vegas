@@ -1,0 +1,133 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html, body{
+	width: 100%;
+	height: 100%;
+	font-family: 'Museo Sans';
+	background: url(../img/back2.gif)no-repeat;
+    background-size: cover;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    opacity: 0;
+}
+.container form{
+	width: 500px;
+	margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0px;
+    bottom: 0;
+    height: 290px;
+    border-radius: 10px;
+    display: none;
+    opacity: 0;
+}
+.container form input{
+	margin: auto;
+    display: block;
+    width: 300px;
+    text-align: center;
+    height: 36px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px auto;
+    font-size: 16px;
+    padding: 5px 0;
+}
+.container form .send{
+	background: #BF0310;
+    height: 45px;
+    color: #fff;
+}
+img{
+    width: 325px;
+    margin: auto;
+    display: block;
+    padding-top: 50px;
+}
+.boxRuleta{
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    position: relative;
+}
+.boxRuleta .ruleta{
+    width: 400px;
+    display: none;
+    opacity: 0;
+    padding-top: 0px;
+}
+.boxRuleta .flecha{
+    width: 35px;
+    opacity: 0;
+    padding-top: 0px;
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+.boxRuleta .ficha{
+    width: 100px;
+    opacity: 0;
+    padding-top: 0px;
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    z-index: 1;
+    bottom: 0;
+}
+.boxRuleta .jugar{
+    position: absolute;
+    top: 105px;
+    z-index: 2;
+    width: 50px;
+    color: #fff;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    display: none;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    text-decoration: none;
+    height: 20px;
+}
+.premio{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    display: none;
+    opacity: 0;
+}
+.premio p{
+    color: #fff;
+    text-align: center;
+    font-size: 36px;
+}
+.premio a{
+    display: block;
+    width: 200px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    margin: 90px auto;
+    font-size: 16px;
+    padding: 15px 0;
+    background: #BF0310;
+    color: #fff;
+    text-decoration: none;
+}
