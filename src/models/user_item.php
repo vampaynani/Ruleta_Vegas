@@ -34,4 +34,20 @@ class UserItem extends PDODB{
 		);
 		return $this->_insert($data);
 	}
+	public function get_all_contestants(){
+		$joins = array(
+			array(
+				"join" => "L",
+				"table" => "users",
+				"relation" => "users_items.id_user=users.id"
+			),
+			array(
+				"join" => "L",
+				"table" => "items",
+				"relation" => "users_items.id_item=items.id"
+			)
+		);
+		$result = $this->_where_in_join($joins, "users.nombre, users.apellido, users.correo, users.telefono, items.nombre AS item", "users_items.id IS NOT NULL")->get();
+		return $result;
+	}
 }

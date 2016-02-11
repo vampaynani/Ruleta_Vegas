@@ -1,7 +1,8 @@
 $(document).on('ready', function(){
-	TweenLite.to('.container', 1, { display: "block", opacity: 1, onComplete: function(){
-		TweenLite.to('form', 1, { display: "block", opacity: 1, ease: Power2.easeOut, y: 100});
-	}});
+	var tl = new TimelineLite();
+	tl.to('.container', 1, { display: "block", opacity: 1});
+	tl.to('form', 1, { display: "block", opacity: 1, ease: Power2.easeOut, y: 100});
+	
 	$('.send').on('click', function(e){
 		e.preventDefault();
 		var formData = {
