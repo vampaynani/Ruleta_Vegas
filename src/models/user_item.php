@@ -9,7 +9,6 @@ class UserItem extends PDODB{
 		return $this->_where("id", "id_user='$a'")->count();
 	}
 	public function get_available_today( $a ){
-		date_default_timezone_set('America/Mexico_City');
 		$today = date('Y-m-d', time()) . ' 00:00:00';
 		$joins = array(
 			array(
@@ -18,7 +17,21 @@ class UserItem extends PDODB{
 				"relation" => "users_items.id_item=items.id"
 			)
 		);
-		$result = $this->_where_in_join($joins, "id", "nombre='$a' AND created_at>'$today'")->count();
+		$result = $this->_where_in_join($joins, "users_items.id", "nombre='$a' AND created_at>'$today'")->count();
 		return $result;
+	}
+	public function total_traded( $a ){
+		$item_id = $a->id;
+		$count = $this->_where("id", "id_item=$item_id")->count();
+		$available = $a->cantidad - $count;
+		if($available <= 0) $available = 0; 
+		return $available;
+	}
+	public function assign_to( $a, $b ){
+		$data = array(
+			'id_user' => $a,
+			'id_item' => $b
+		);
+		return $this->_insert($data);
 	}
 }

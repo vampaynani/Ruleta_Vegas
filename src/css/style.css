@@ -29,6 +29,13 @@ html, body{
     display: none;
     opacity: 0;
 }
+.container form .loading{
+    color: #fff;
+    display: none;
+}
+.container form .error{
+    color: #ff0000;
+}
 .container form input{
 	margin: auto;
     display: block;
@@ -53,20 +60,32 @@ img{
     padding-top: 50px;
 }
 .boxRuleta{
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     margin: auto;
     position: relative;
+    top: 20px;
 }
 .boxRuleta .ruleta{
     width: 300px;
     display: none;
-    opacity: 0;
+    opacity: 1;
     padding-top: 0px;
 }
 .boxRuleta .flecha{
     width: 35px;
-    opacity: 0;
+    opacity: 1;
+    padding-top: 0px;
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -5px;
+    z-index: 1;
+}
+.boxRuleta .ficha{
+    width: 100px;
+    opacity: 1;
     padding-top: 0px;
     display: none;
     position: absolute;
@@ -74,22 +93,11 @@ img{
     right: 0;
     top: 0;
     z-index: 1;
-}
-.boxRuleta .ficha{
-    width: 100px;
-    opacity: 0;
-    padding-top: 0px;
-    display: none;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -100px;
-    z-index: 1;
     bottom: 0;
 }
 .boxRuleta .jugar{
     position: absolute;
-    top: -40px;
+    top: 0;
     z-index: 2;
     width: 50px;
     color: #fff;
