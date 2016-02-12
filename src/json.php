@@ -24,8 +24,8 @@
 
 			evaluate($name, 'nombre');
 			evaluate($lastname, 'apellido');
-			evaluate($mail, 'correo');
-			evaluate($phone, 'teléfono');
+			evaluate($mail, 'correo', 'isEmail');
+			evaluate($phone, 'teléfono', 'isPhone');
 
 			$id = $user->exist($mail);
 			if(!$id) $id = $user->create($name, $lastname, $mail, $phone);
@@ -76,8 +76,19 @@
 		echo json_encode($result);
 		exit;
 	}
-	function evaluate($value, $key){
+	function evaluate($value, $key, $rules=null){
 		$error = "Debes escribir un $key válido";
 		if(!$value || $value == '') fail($error);
+		$rules_list = explode('|', $rules);
+		foreach ($rules_list as $rule) {
+			switch($rule){
+				case 'isEmail':
+					if( !filter_var($value, FILTER_VALIDATE_EMAIL) ) fail('Debes escribir un correo válido');
+					break;
+				case 'isPhone':
+					if(count(str_split($value)) < 7 || count(str_split($value)) > 10 || !filter_var($value, FILTER_VALIDATE_INT) ) fail('Debes escribir un teléfono válido');
+					break;
+			}
+		}
 	}
 	
