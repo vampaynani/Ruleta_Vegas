@@ -1,4 +1,6 @@
 $(document).on('ready', function(){
+	createjs.Sound.registerSound("./sounds/ruleta.mp3", "ruleta");
+
 	var tl = new TimelineLite();
 	tl.to('.container', 1, { display: "block", opacity: 1});
 	tl.to('form', 1, { display: "block", opacity: 1, ease: Power2.easeOut, y: 100});
@@ -33,17 +35,20 @@ $(document).on('ready', function(){
 	});
 	$('.jugar').on('click', function(e){
 		e.preventDefault();
-
 		$('.jugar').off('click');
+
 		TweenLite.to('.jugar', 0.4, {scale: 1});
 		TweenMax.to('.ruleta', 1, {rotation: 360, ease: Linear.easeNone, repeat: -1});
 		
+		createjs.Sound.play("ruleta");
+
 		var formData = { method: 'play' };
 		
 		$.post('json.php', formData, function(response){
 			var box = 0;
 			var pre = '';
 			TweenMax.killAll();
+			createjs.Sound.stop();
 			if(response.code == 500){
 				alert(response.error);
 			}else{

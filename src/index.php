@@ -4,7 +4,7 @@ include ("_head.php")
 ?>
 <body>
 	<div class="container">
-		<img src="./img/title.png">
+		<img src="./img/title.png" class="vegas">
 		<div class="boxRuleta">
 			<a href="" class="jugar">Play</a>
 			<img src="./img/ficha.png" class="ficha">

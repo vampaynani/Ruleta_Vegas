@@ -8,5 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
 	<script type="text/javascript" src="./js/javascript.js"></script>
 </head>
