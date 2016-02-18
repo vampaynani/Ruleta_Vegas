@@ -6,7 +6,7 @@
 	include_once("models/item.php");
 	include_once("models/user_item.php");
 	
-	if( empty($_REQUEST) ) header("HTTP/1.1 500 Internal Server Error");
+	if( empty($_POST) ) header("HTTP/1.1 500 Internal Server Error");
 	
 	header('Content-Type: application/json');
 	
@@ -15,7 +15,7 @@
 	$ui = new UserItem();
 	$max_participations = 1;
 
-	switch($_REQUEST['method']){
+	switch($_POST['method']){
 		case 'save_user':
 			$name = $_POST['nombre'];
 			$lastname = $_POST['apellido'];
@@ -35,18 +35,14 @@
 			response($id);
 			break;
 		case 'play':
-			//$id = base64_decode($_SESSION['id']);
-			$id = 28;
-			//if( $ui->num_of_participations($id) >= $max_participations ) fail("Has llegado al límite de participaciones por usuario, gracias por tu interés");
+			$id = base64_decode($_SESSION['id']);
+			if( $ui->num_of_participations($id) >= $max_participations ) fail("Has llegado al límite de participaciones por usuario, gracias por tu interés");
 			$mochilas = 2;
 			$audifonos = 1;
 			
 			$t_mochilas = $ui->total_traded( $item->get_total('mochila') );
 			$t_audifonos = $ui->total_traded( $item->get_total('audifonos') );
 			
-			echo $t_mochilas;
-			echo $t_audifonos;
-
 			if( $t_mochilas > 0 ){
 				$mochilas -= $ui->get_available_today( 'mochila' );
 			}else{
@@ -73,9 +69,9 @@
 			$selected = rand(0, count($items) - 1);
 			$iselected = $items[$selected];
 			$ui->assign_to($id, $iselected);
-			//$data = $item->get_data($iselected);
-			//$data->user = $user->get_name($id);
-			//response($data);
+			$data = $item->get_data($iselected);
+			$data->user = $user->get_name($id);
+			response($data);
 			break;
 	};
 
