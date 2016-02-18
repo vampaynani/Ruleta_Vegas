@@ -6,7 +6,7 @@
 	include_once("models/item.php");
 	include_once("models/user_item.php");
 	
-	if( empty($_POST) ) header("HTTP/1.1 500 Internal Server Error");
+	if( empty($_REQUEST) ) header("HTTP/1.1 500 Internal Server Error");
 	
 	header('Content-Type: application/json');
 	
@@ -15,7 +15,7 @@
 	$ui = new UserItem();
 	$max_participations = 1;
 
-	switch($_POST['method']){
+	switch($_REQUEST['method']){
 		case 'save_user':
 			$name = $_POST['nombre'];
 			$lastname = $_POST['apellido'];
@@ -35,17 +35,28 @@
 			response($id);
 			break;
 		case 'play':
-			$id = base64_decode($_SESSION['id']);
-			if( $ui->num_of_participations($id) >= $max_participations ) fail("Has llegado al límite de participaciones por usuario, gracias por tu interés");
+			//$id = base64_decode($_SESSION['id']);
+			$id = 28;
+			//if( $ui->num_of_participations($id) >= $max_participations ) fail("Has llegado al límite de participaciones por usuario, gracias por tu interés");
 			$mochilas = 2;
 			$audifonos = 1;
-			$id = base64_decode($_SESSION['id']);
 			
 			$t_mochilas = $ui->total_traded( $item->get_total('mochila') );
 			$t_audifonos = $ui->total_traded( $item->get_total('audifonos') );
 			
-			if( $t_mochilas > 0 ) $mochilas -= $ui->get_available_today( 'mochila' );
-			if( $t_audifonos > 0 ) $audifonos -= $ui->get_available_today( 'audifonos' );
+			echo $t_mochilas;
+			echo $t_audifonos;
+
+			if( $t_mochilas > 0 ){
+				$mochilas -= $ui->get_available_today( 'mochila' );
+			}else{
+				$mochilas = 0;	
+			} 
+			if( $t_audifonos > 0 ) {
+				$audifonos -= $ui->get_available_today( 'audifonos' );
+			}else{
+				$audifonos = 0;
+			}
 
 			$items = array(2,2,2,3,3,3,4,4);
 
@@ -55,14 +66,16 @@
 			}
 			if($audifonos > 0) array_push($items, 7);
 
+			var_dump( $items );
+
 			shuffle($items);
 
 			$selected = rand(0, count($items) - 1);
 			$iselected = $items[$selected];
 			$ui->assign_to($id, $iselected);
-			$data = $item->get_data($iselected);
-			$data->user = $user->get_name($id);
-			response($data);
+			//$data = $item->get_data($iselected);
+			//$data->user = $user->get_name($id);
+			//response($data);
 			break;
 	};
 
