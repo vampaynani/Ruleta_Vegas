@@ -15,7 +15,7 @@
 	$ui = new UserItem();
 	$max_participations = 1;
 
-	switch($_POST['method']){
+	switch(@$_POST['method']){
 		case 'save_user':
 			$name = $_POST['nombre'];
 			$lastname = $_POST['apellido'];
@@ -37,10 +37,9 @@
 		case 'play':
 			$id = base64_decode($_SESSION['id']);
 			if( $ui->num_of_participations($id) >= $max_participations ) fail("Has llegado al límite de participaciones por usuario, gracias por tu interés");
-			$mochilas = 2;
-			$audifonos = 1;
-			
-			$t_mochilas = $ui->total_traded( $item->get_total('mochila') );
+			$mochilas = 1;
+			$audifonos = 0;
+			/*$t_mochilas = $ui->total_traded( $item->get_total('mochila') );
 			$t_audifonos = $ui->total_traded( $item->get_total('audifonos') );
 			
 			if( $t_mochilas > 0 ){
@@ -52,7 +51,9 @@
 				$audifonos -= $ui->get_available_today( 'audifonos' );
 			}else{
 				$audifonos = 0;
-			}
+			}*/
+			$mochilas -= $ui->get_available_today( 'mochila' );
+			$audifonos -= $ui->get_available_today( 'audifonos' );
 
 			$items = array(2,2,2,3,3,3,4,4);
 
