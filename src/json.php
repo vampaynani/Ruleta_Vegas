@@ -63,8 +63,6 @@
 			}
 			if($audifonos > 0) array_push($items, 7);
 
-			var_dump( $items );
-
 			shuffle($items);
 
 			$selected = rand(0, count($items) - 1);
