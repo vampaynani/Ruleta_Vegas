@@ -37,7 +37,7 @@
 		case 'play':
 			$id = base64_decode($_SESSION['id']);
 			if( $ui->num_of_participations($id) >= $max_participations ) fail("Has llegado al límite de participaciones por usuario, gracias por tu interés");
-			$mochilas = 1;
+			$mochilas = 0;
 			$audifonos = 0;
 			/*$t_mochilas = $ui->total_traded( $item->get_total('mochila') );
 			$t_audifonos = $ui->total_traded( $item->get_total('audifonos') );
